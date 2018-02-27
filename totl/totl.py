@@ -2,40 +2,7 @@
 
 """Main module."""
 import re
-
-# light class
-class lightTester:
-    lights = None
-    
-    # n is the first number from input file
-    def __init__(self,n):
-        
-        # Error handling, check input type
-        #if type(n) is int: 
-        # Initial state of all the lights are off
-        try:
-            n=int(n)
-            self.lights = [[False]*n for _ in range(n)]
-        except ValueError:
-            print("Fail to parse the light number.")
-    
-    def apply(self,cmd,x,y):
-        # Three recognizable cmd and error handling
-        if cmd == 'turn on':
-            self.lights[x][y] = True
-        elif cmd == 'turn off':
-            self.lights[x][y] = False
-        elif cmd == 'switch':
-            if self.lights[x][y] == True:
-                self.lights[x][y] = False
-            else:
-                self.lights[x][y] = True
-        else:        
-            print('Wrong Command at place: ',x,' ,',y)
-            
-    def count(self):
-        return sum(x.count(True) for x in self.lights)
-    
+from totl.lightTester import LightTester   
 # Main function
 def main (filename):
     with open(filename) as file:
@@ -43,13 +10,24 @@ def main (filename):
         instructions = [x.strip() for x in instructions]
         #return instructions[0]
         #print(instructions)
-        lights = lightTester(instructions[0])
+        lights = LightTester(instructions[0])
         
-        for cmd in instructions[1:]:
+        pat = re.compile(r".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*")
+        for instruction in instructions[1:]:
             #print(cmd)
-            pat = re.compile(r".*(turn on|turn off|switch)\s*([+-]?\d+) \
-\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*")
-            
+            ins = pat.match(instruction)
+            #lights.apply(pat.group, x, y)
+            #print(ins)
+            # Start to work on 'through'
+            x1 = int(ins.group(2))
+            y1 = int(ins.group(3))
+            x2 = int(ins.group(4))
+            y2 = int(ins.group(5))
+            for x in range(x1,x2+1):
+                for y in range(y1,y2+1):
+                    lights.apply(ins.group(1),x,y)
+    
+    return lights.count()
             
             
             
