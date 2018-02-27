@@ -18,4 +18,11 @@ def test_light():
     test.apply('switch',0,0)
     assert test.count()==1
     #print(test.lights)
-    totl.main('tests/input_assign3_b_v2.txt')
+
+def test_readIns():
+    #Open and read the file
+    #assert totl.main('tests/test1')
+    #assert totl.main('tests/test1') == 'h'
+    #assert totl.main('tests/test1') == 'turn off 0,0 through 4,4'
+    #assert totl.main('tests/test1') == 1
+    
