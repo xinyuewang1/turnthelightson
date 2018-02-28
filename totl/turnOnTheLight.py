@@ -2,7 +2,8 @@
 
 """Main module."""
 import re
-from totl.lightTester import LightTester   
+from totl.lightTester import LightTester  
+ 
 # Main function
 def main (filename):
     with open(filename) as file:

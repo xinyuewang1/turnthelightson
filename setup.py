@@ -4,6 +4,7 @@
 """The setup script."""
 
 from setuptools import setup, find_packages
+#from idna.idnadata import scripts
 
 with open('README.rst') as readme_file:
     readme = readme_file.read()
@@ -32,8 +33,10 @@ setup(
     long_description=readme + '\n\n' + history,
     author="Xinyue Wang",
     author_email='xinyue.wang1@ucdconnect.ie',
-    url='https://github.com/xinyuewang1/totl',
+    url='https://github.com/xinyuewang1/turnthelightson',
     packages=find_packages(include=['totl']),
+    #entry_points={'console_scripts': ['totl=flask_platformy.run:runApp',],},
+    scripts=['totl/commandLine.py'],
     include_package_data=True,
     install_requires=requirements,
     license="GNU General Public License v3",
