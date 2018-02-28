@@ -6,7 +6,7 @@ totl.commandLine -- command line entry
 
 import sys
 import os
-
+import time
 from optparse import OptionParser
 from totl.turnOnTheLight import main as lightMain
 import requests
@@ -62,17 +62,23 @@ def main(argv=None):
         #print(opts.infile)
         #print(args)
         if opts.infile[:4] == "http":
+            ts=time.time()
             url = opts.infile
             r = requests.get(url)
             if r.status_code == 200:
-                #print("connected...")
+                print("connected...")
                 with open('tmp.txt','w+') as file:
                     #print(r.text[:10])
                     file.write(r.text)
+                print("Calculating...")
+                print("Used time: ",time.time()-ts)
+                lightMain('tmp.txt')
                 #print(os.path.dirname(os.path.realpath('tmp.txt')))
-                print(lightMain('tmp.txt'))
+                #print("The lights are on: ",lightMain('tmp.txt'))
                 os.remove('tmp.txt')
-        
+        else:
+            lightMain(opts.infile)
+            #print("The lights are on: ",lightMain(opts.infile))
 
     except Exception as e:
         indent = len(program_name) * " "
