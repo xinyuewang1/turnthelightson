@@ -27,7 +27,7 @@ def main (filename):
             for x in range(x1,x2+1):
                 for y in range(y1,y2+1):
                     lights.apply(ins.group(1),x,y)
-    
+    print(lights.count())
     return lights.count()
             
             

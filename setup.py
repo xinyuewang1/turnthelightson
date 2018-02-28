@@ -28,15 +28,15 @@ test_requirements = [
 
 setup(
     name='totl',
-    version='0.3.0',
+    version='0.5.0',
     description="TDD assignment, a LED light tester",
     long_description=readme + '\n\n' + history,
     author="Xinyue Wang",
     author_email='xinyue.wang1@ucdconnect.ie',
     url='https://github.com/xinyuewang1/turnthelightson',
     packages=find_packages(include=['totl']),
-    #entry_points={'console_scripts': ['totl=flask_platformy.run:runApp',],},
-    scripts=['totl/commandLine.py'],
+    entry_points={'console_scripts': ['totl=totl.commandLine:main',],},
+    #scripts=['totl/commandLine.py'],
     include_package_data=True,
     install_requires=requirements,
     license="GNU General Public License v3",

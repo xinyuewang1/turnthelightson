@@ -9,6 +9,7 @@ import os
 
 from optparse import OptionParser
 from totl.turnOnTheLight import main as lightMain
+import requests
 
 __all__ = []
 __version__ = 0.1
@@ -39,7 +40,7 @@ def main(argv=None):
         parser = OptionParser(version=program_version_string, epilog=program_longdesc, description=program_license)
         parser.add_option("-i", "--input", dest="infile", help="set input path [default: %default]", metavar="FILE")
         parser.add_option("-o", "--out", dest="outfile", help="set output path [default: %default]", metavar="FILE")
-        parser.add_option("-v", "--verbose", dest="verbose", action="count", help="set verbosity level [default: %default]")
+        #parser.add_option("-v", "--verbose", dest="verbose", action="count", help="set verbosity level [default: %default]")
 
         # set defaults
         parser.set_defaults(outfile="./out.txt", infile="./in.txt")
@@ -48,20 +49,35 @@ def main(argv=None):
         (opts, args) = parser.parse_args(argv)
         # filename stored in options.filename
 
+        '''
         if opts.verbose > 0:
             print("verbosity level = %d" % opts.verbose)
         if opts.infile:
             print("infile = %s" % opts.infile)
         if opts.outfile:
             print("outfile = %s" % opts.outfile)
-
+        '''
+        
         # MAIN BODY #
-        lightMain(args[0])
+        #print(opts.infile)
+        #print(args)
+        if opts.infile[:4] == "http":
+            url = opts.infile
+            r = requests.get(url)
+            if r.status_code == 200:
+                #print("connected...")
+                with open('tmp.txt','w+') as file:
+                    #print(r.text[:10])
+                    file.write(r.text)
+                #print(os.path.dirname(os.path.realpath('tmp.txt')))
+                print(lightMain('tmp.txt'))
+                os.remove('tmp.txt')
+        
 
     except Exception as e:
         indent = len(program_name) * " "
         sys.stderr.write(program_name + ": " + repr(e) + "\n")
-        sys.stderr.write(indent + "  for help use --help")
+        sys.stderr.write(indent + "  for help use --help\n")
         return 2
 
 
