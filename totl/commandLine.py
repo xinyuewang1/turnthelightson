@@ -61,7 +61,7 @@ def main(argv=None):
         # MAIN BODY #
         #print(opts.infile)
         #print(args)
-        if opts.infile[:4] == "http":
+        if opts.infile.startswith("http"):
             ts=time.time()
             url = opts.infile
             r = requests.get(url)
