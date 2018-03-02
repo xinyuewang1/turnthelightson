@@ -3,6 +3,8 @@ Created on 27 Feb 2018
 
 @author: naomiwang
 '''
+import numpy
+
 # light class
 class LightTester:
     lights = None
@@ -14,7 +16,8 @@ class LightTester:
         # Initial state of all the lights are off
         try:
             n=int(n)
-            self.lights = [[False]*n for _ in range(n)]
+            #self.lights = [[False]*n for _ in range(n)]
+            self.lights = numpy.array([[False]*n for _ in range(n)])
         except ValueError:
             print("Fail to parse the light number.")
             
@@ -26,14 +29,19 @@ class LightTester:
         #take care of out of range
         if 0<=x<self.size() and 0<=y<self.size():
             if cmd == 'turn on':
-                self.lights[x][y] = True
+                #self.lights[x][y] = True
+                self.lights[x,y] = True
             elif cmd == 'turn off':
-                self.lights[x][y] = False
+                #self.lights[x][y] = False
+                self.lights[x,y] = False
             elif cmd == 'switch':
-                if self.lights[x][y] == True:
-                    self.lights[x][y] = False
+                #if self.lights[x][y] == True:
+                if self.lights[x,y] == True:
+                    #self.lights[x][y] = False
+                    self.lights[x,y] = False
                 else:
-                    self.lights[x][y] = True
+                    #self.lights[x][y] = True
+                    self.lights[x,y] = True
             else:        
                 print('Wrong Command at place: ',x,' ,',y)
                 pass
@@ -41,4 +49,7 @@ class LightTester:
             pass
             
     def count(self):
-        return sum(x.count(True) for x in self.lights)
+        #return sum(x.count(True) for x in self.lights)
+        return sum((x==True).sum() for x in self.lights)
+    
+    
