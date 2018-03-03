@@ -17,7 +17,8 @@ class LightTester:
         try:
             n=int(n)
             #self.lights = [[False]*n for _ in range(n)]
-            self.lights = numpy.array([[False]*n for _ in range(n)])
+            #self.lights = numpy.array([[False]*n for _ in range(n)])
+            self.lights=numpy.zeros(shape=(n,n))
             #print(self.lights)
         except ValueError:
             print("Fail to parse the light number.")
@@ -68,19 +69,27 @@ class LightTester:
             if cmd == 'turn on':
                 #self.lights[x][y] = True
                 #self.lights[x,y] = True
-                self.lights[x1:x2+1,y1:y2+1]=True
+                #self.lights[x1:x2+1,y1:y2+1]=True
+                self.lights[x1:x2+1,y1:y2+1]=1
                 #print(self.lights)
             elif cmd == 'turn off':
                 #self.lights[x][y] = False
                 #self.lights[x,y] = False
-                self.lights[x1:x2+1,y1:y2+1]=False
+                #self.lights[x1:x2+1,y1:y2+1]=False
+                self.lights[x1:x2+1,y1:y2+1]=0
                 #print(self.lights)
             elif cmd == 'switch':
                 #if self.lights[x][y] == True:
+                '''
                 rows1, cols1 = numpy.where(self.lights[x1:x2+1,y1:y2+1]==True)
                 rows2,cols2 = numpy.where(self.lights[x1:x2+1,y1:y2+1]==False)
                 self.lights[x1:x2+1,y1:y2+1][rows1,cols1]=False
                 self.lights[x1:x2+1,y1:y2+1][rows2,cols2]=True
+                '''
+                rows1, cols1 = numpy.where(self.lights[x1:x2+1,y1:y2+1]==1)
+                rows2,cols2 = numpy.where(self.lights[x1:x2+1,y1:y2+1]==0)
+                self.lights[x1:x2+1,y1:y2+1][rows1,cols1]=0
+                self.lights[x1:x2+1,y1:y2+1][rows2,cols2]=1
                 #print(self.lights)
                 #if self.lights[x,y] == True:
                     #self.lights[x][y] = False
@@ -98,6 +107,11 @@ class LightTester:
             
     def count(self):
         #return sum(x.count(True) for x in self.lights)
-        return sum((x==True).sum() for x in self.lights)
-    
+        '''
+        unique, counts = numpy.unique(self.lights, return_counts=True)
+        x = dict(zip(unique, counts))
+        #return sum((x==True).sum() for x in self.lights)
+        return x[True]
+        '''
+        return int(numpy.sum(self.lights))
     

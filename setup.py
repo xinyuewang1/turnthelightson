@@ -28,7 +28,7 @@ test_requirements = [
 
 setup(
     name='totl',
-    version='1.5.2',
+    version='1.6.2',
     description="TDD assignment, a LED light tester",
     long_description=readme + '\n\n' + history,
     author="Xinyue Wang",
