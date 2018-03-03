@@ -1,1 +1,4 @@
-{}
+{
+  "tests/test_totl.py::test_light": true,
+  "tests/test_totl.py::test_readIns": true
+}
