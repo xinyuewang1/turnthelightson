@@ -32,7 +32,7 @@ def main (filename):
                      #   for y in range(y1,y2+1):
                       #      lights.apply(ins.group(1),x,y)
                     lights.apply(ins.group(1),x1,y1,x2,y2)
-        print(lights.count())
+        print("#occupied: ",lights.count())
         return lights.count()
     except OSError:
         print('No such file or directory: ',filename)
