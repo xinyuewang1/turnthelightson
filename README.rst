@@ -26,7 +26,12 @@ TDD assignment, a LED light tester
 Features
 --------
 
-* TODO
+install
+	pip install git+https://github.com/xinyuewang1/turnthelightson.git
+
+command line running
+	totl -i/--input filename/url
+	e.g. totl -i http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3.txt
 
 Credits
 -------
