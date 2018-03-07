@@ -86,10 +86,15 @@ class LightTester:
                 self.lights[x1:x2+1,y1:y2+1][rows1,cols1]=False
                 self.lights[x1:x2+1,y1:y2+1][rows2,cols2]=True
                 '''
+                #self.lights[x1:x2+1,y1:y2+1]=1-self.lights[x1:x2+1,y1:y2+1]
+                #self.lights[x1:x2+1,y1:y2+1]^=1
+                numpy.logical_not(self.lights[x1:x2+1,y1:y2+1])
+                '''
                 rows1, cols1 = numpy.where(self.lights[x1:x2+1,y1:y2+1]==1)
                 rows2,cols2 = numpy.where(self.lights[x1:x2+1,y1:y2+1]==0)
                 self.lights[x1:x2+1,y1:y2+1][rows1,cols1]=0
                 self.lights[x1:x2+1,y1:y2+1][rows2,cols2]=1
+                '''
                 #print(self.lights)
                 #if self.lights[x,y] == True:
                     #self.lights[x][y] = False
