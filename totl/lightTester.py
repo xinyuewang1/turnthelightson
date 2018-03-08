@@ -53,10 +53,10 @@ class LightTester:
     '''
     #numpy version
     def apply(self,cmd,x1,y1,x2,y2):
-        if x2<0 or y2<0:
+        if (x2<0 or y2<0) or (x1>=self.size() or y1>=self.size()):
             pass
-        elif x1>=self.size() or y1>=self.size():
-            pass
+        #elif :
+         #   pass
         else:
             x1=max(x1,0)
             x2=min(x2,self.size()-1)
@@ -86,9 +86,9 @@ class LightTester:
                 self.lights[x1:x2+1,y1:y2+1][rows1,cols1]=False
                 self.lights[x1:x2+1,y1:y2+1][rows2,cols2]=True
                 '''
-                #self.lights[x1:x2+1,y1:y2+1]=1-self.lights[x1:x2+1,y1:y2+1]
+                self.lights[x1:x2+1,y1:y2+1]=1-self.lights[x1:x2+1,y1:y2+1]
                 #self.lights[x1:x2+1,y1:y2+1]^=1
-                numpy.logical_not(self.lights[x1:x2+1,y1:y2+1])
+                #numpy.logical_not(self.lights[x1:x2+1,y1:y2+1])
                 '''
                 rows1, cols1 = numpy.where(self.lights[x1:x2+1,y1:y2+1]==1)
                 rows2,cols2 = numpy.where(self.lights[x1:x2+1,y1:y2+1]==0)

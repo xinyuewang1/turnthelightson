@@ -24,10 +24,10 @@ def main (filename):
                 # Start to work on 'through'
                 # take care of match nothing, aka wrong command.
                 if ins != None:
-                    x1 = int(ins.group(2))
-                    y1 = int(ins.group(3))
-                    x2 = int(ins.group(4))
-                    y2 = int(ins.group(5))
+                    x1 = min(int(ins.group(2)),int(ins.group(4)))
+                    y1 = min(int(ins.group(3)),int(ins.group(5)))
+                    x2 = max(int(ins.group(4)),int(ins.group(2)))
+                    y2 = max(int(ins.group(3)),int(ins.group(5)))
                     #for x in range(x1,x2+1):
                      #   for y in range(y1,y2+1):
                       #      lights.apply(ins.group(1),x,y)

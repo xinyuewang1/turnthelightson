@@ -10,13 +10,13 @@ from totl.lightTester import LightTester
 def test_light():
     test = LightTester(3)
     #print(test.lights,test.count())
-    test.apply('turn on',0,0)
+    test.apply('turn on',0,0,0,0)
     assert test.count()==1
     
-    test.apply('turn off',0,0)
+    test.apply('turn off',0,0,0,0)
     assert test.count()==0
     
-    test.apply('switch',0,0)
+    test.apply('switch',0,0,0,0)
     assert test.count()==1
     #print(test.lights)
 
@@ -30,12 +30,13 @@ def test_readIns():
     #assert totl.main('tests/test1') == 'h'
     #assert totl.main('tests/test1') == 'turn off 0,0 through 4,4'
     #assert totl.main('tests/test1')==1
-    #assert turnOnTheLight.main('tests/test1')==21-8
+    assert turnOnTheLight.main('tests/test1')==14
     #assert turnOnTheLight.main('tests/input_assign3_b_v2.txt') < 10000
-    assert turnOnTheLight.main('tests/test2') == 437 
+    #assert turnOnTheLight.main('tests/test2') == 437 
     
     #existence of the input file
-    assert turnOnTheLight.main('../tmp.txt') == None
+    #assert turnOnTheLight.main('../tmp.txt') == None
+    assert turnOnTheLight.main('tests/test2') == 437
     
     
     
